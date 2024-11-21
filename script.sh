@@ -13,6 +13,9 @@ ask_user_role() {
 
 # If the user is a student; student menu
 student_menu() {
+
+    stutendJson="student.json"
+
     echo "Choose an option:"
     echo "1. See lessons for a specific week"
     echo "2. See all upcoming tests"
@@ -21,13 +24,13 @@ student_menu() {
 
     case "$choice" in
         1)
-            display_student_lessons
+            display_lessons $stutendJson
             ;;
         2)
-            display_upcoming_tests
+            display_upcoming_tests $stutendJson
             ;;
         3)
-            # Calculer le nb d'heure pour une semaine donnée: à implementer
+            display_hour_for_week $stutendJson
             ;;
         *)
             echo "Invalid option. Please try again."
