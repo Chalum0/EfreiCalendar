@@ -14,7 +14,9 @@ ask_user_role() {
 # If the user is a student; student menu
 student_menu() {
 
-    stutend_json="student.json"
+    echo "a"
+
+    stutend_json="calendars/student.json"
 
     echo "Choose an option:"
     echo "1. See lessons for a specific week"
@@ -42,8 +44,36 @@ student_menu() {
 # If the user is a teacher; teacher menu
 teacher_menu() {
 
-    teacher_json="teacher.json"
-    
+    echo "b"
+
+    teacher_json="calendars/teacher.json"
+
+    echo "Choose an option:"
+    echo "1. See lessons for a specific week"
+    echo "2. Count the amount of hours in a week"
+    echo "3. Display the future lessons of a certain module"
+    echo "4. Find an empty slot in common with a class"
+    read -r choice
+
+    case "$choice" in
+        1)
+            display_lessons $teacher_json
+            ;;
+        2)
+            display_hour_for_week $teacher_json
+            ;;
+        3)
+            # Implementer le recherche de module
+            ;;
+        4)
+            # Implementer le recherche de créneaux communs
+            ;;
+        *)
+            echo "Invalid option. Please try again."
+            teacher_menu
+            ;;
+    esac
+
 }
 
 ask_user_role
@@ -52,4 +82,5 @@ if [[ $? -eq 0 ]]; then
     student_menu
 else
     echo "Welcome, teacher!"
+    teacher_menu
 fi
