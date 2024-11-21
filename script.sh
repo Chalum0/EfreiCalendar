@@ -21,7 +21,7 @@ student_menu() {
 
     case "$choice" in
         1)
-            see_student_lessons
+            display_student_lessons
             ;;
         2)
             display_upcoming_tests
