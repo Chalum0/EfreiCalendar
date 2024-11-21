@@ -108,3 +108,35 @@ display_hour_for_week() {
     echo "You have a total of $total_hours hours on week $week."
 
 }
+
+
+display_common_schedule() {
+
+    teacher_schedule=$(jq -r '.rows[] | "\(.srvTimeCrDateFrom) \(.timeCrTimeFrom) \(.timeCrTimeTo)"' "$1")
+    student_schedule=$(jq -r '.rows[] | "\(.srvTimeCrDateFrom) \(.timeCrTimeFrom) \(.timeCrTimeTo)"' "$2")
+
+    start_date=$(date -d "+1 day" "+%Y-%m-%d")
+    end_date=$(date -d "+30 days" "+%Y-%m-%d")
+    hours=("0800" "0900" "1000" "1100" "1200" "1400" "1500" "1600" "1700" "1800")
+
+    for date in $(seq 0 30); do
+        current_date=$(date -d "$start_date +$date days" "+%Y-%m-%d")
+        day_of_week=$(date -d "$current_date" "+%u")
+
+        if [[ $day_of_week -ge 6 ]]; then
+            continue
+        fi
+
+        for hour in "${hours[@]}"; do
+            teacher_busy=$(echo "$teacher_schedule" | grep "$current_date" | awk -v hour="$hour" '$2 <= hour && $3 > hour')
+            student_busy=$(echo "$student_schedule" | grep "$current_date" | awk -v hour="$hour" '$2 <= hour && $3 > hour')
+
+            if [[ -z $teacher_busy && -z $student_busy ]]; then
+                echo "Next free period: $current_date at $(echo "$hour" | sed 's/^\(..\)\(..\)$/\1:\2/')"
+                return
+            fi
+        done
+    done
+
+    echo "No free period match found in the next 14 days."
+}

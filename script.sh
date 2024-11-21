@@ -47,6 +47,7 @@ teacher_menu() {
     echo "b"
 
     teacher_json="calendars/teacher.json"
+    student_json="calendars/student.json"
 
     echo "Choose an option:"
     echo "1. See lessons for a specific week"
@@ -66,7 +67,7 @@ teacher_menu() {
             display_lessons_of_type $teacher_json
             ;;
         4)
-            # Implementer le recherche de créneaux communs
+            display_common_schedule $teacher_json $student_json
             ;;
         *)
             echo "Invalid option. Please try again."
