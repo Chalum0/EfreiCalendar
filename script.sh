@@ -14,7 +14,7 @@ ask_user_role() {
 # If the user is a student; student menu
 student_menu() {
 
-    stutendJson="student.json"
+    stutend_json="student.json"
 
     echo "Choose an option:"
     echo "1. See lessons for a specific week"
@@ -24,19 +24,26 @@ student_menu() {
 
     case "$choice" in
         1)
-            display_lessons $stutendJson
+            display_lessons $stutend_json
             ;;
         2)
-            display_upcoming_tests $stutendJson
+            display_upcoming_tests $stutend_json
             ;;
         3)
-            display_hour_for_week $stutendJson
+            display_hour_for_week $stutend_json
             ;;
         *)
             echo "Invalid option. Please try again."
             student_menu
             ;;
     esac
+}
+
+# If the user is a teacher; teacher menu
+teacher_menu() {
+
+    teacher_json="teacher.json"
+    
 }
 
 ask_user_role
