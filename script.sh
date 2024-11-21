@@ -63,7 +63,7 @@ teacher_menu() {
             display_hour_for_week $teacher_json
             ;;
         3)
-            # Implementer le recherche de module
+            display_lessons_of_type $teacher_json
             ;;
         4)
             # Implementer le recherche de créneaux communs

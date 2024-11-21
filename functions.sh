@@ -54,6 +54,30 @@ display_upcoming_tests() {
         }' "$json_file" | jq -s 'sort_by(.Date) | .[0:10]'
 }
 
+display_lessons_of_type() {
+
+    local json_file="$1"
+    echo "Enter the name of the lesson:"
+    read -r type
+
+    if [[ ! -f "$json_file" ]]; then
+        echo "JSON file not found: $json_file"
+        return 1
+    fi
+
+    jq --arg type "$type" '
+        .rows[] |
+        select(.prgoOfferingDesc == $type) |
+        {
+            Date: .srvTimeCrDateFrom,
+            Time: "\(.timeCrTimeFrom)-\(.timeCrTimeTo)",
+            Description: .prgoOfferingDesc,
+            Room: .srvTimeCrDelRoom,
+            Teacher: .tchResName
+        }' "$json_file" | jq -s 'sort_by(.Date) | .[0:10]'
+
+}
+
 display_hour_for_week() {
 
     # Asks for a week and get the amount of lessons of that week
