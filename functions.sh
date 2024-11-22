@@ -4,6 +4,7 @@ display_lessons() {
 
     local json_file="$1"
     local week="$2"
+    week=$((week - 1))
 
     if [[ -z "$week" ]]; then
         echo "Please provide a week number (1-52)."
@@ -54,7 +55,7 @@ display_upcoming_tests() {
 display_lessons_of_type() {
 
     local json_file="$1"
-    local type="$2"
+    type="$2"
 
     if [[ ! -f "$json_file" ]]; then
         echo "JSON file not found: $json_file"
@@ -78,6 +79,7 @@ display_hour_for_week() {
 
     local json_file="$1"
     local week="$2"
+    week=$((week - 1))
 
     if [[ -z "$week" ]]; then
         echo "Please provide a week number (1-52)."
