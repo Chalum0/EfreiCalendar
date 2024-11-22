@@ -2,11 +2,8 @@
 
 display_lessons() {
 
-    # Asks for a week and displays the lessons for that wek
-
-    echo "Enter the week number:"
-    read -r week
     local json_file="$1"
+    local week="$2"
 
     if [[ -z "$week" ]]; then
         echo "Please provide a week number (1-52)."
@@ -57,8 +54,7 @@ display_upcoming_tests() {
 display_lessons_of_type() {
 
     local json_file="$1"
-    echo "Enter the name of the lesson:"
-    read -r type
+    local type="$2"
 
     if [[ ! -f "$json_file" ]]; then
         echo "JSON file not found: $json_file"
@@ -80,11 +76,8 @@ display_lessons_of_type() {
 
 display_hour_for_week() {
 
-    # Asks for a week and get the amount of lessons of that week
-
-    echo "Enter the week number:"
-    read -r week
     local json_file="$1"
+    local week="$2"
 
     if [[ -z "$week" ]]; then
         echo "Please provide a week number (1-52)."
