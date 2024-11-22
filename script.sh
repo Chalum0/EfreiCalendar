@@ -70,23 +70,23 @@ student_menu() {
 
     case "$choice" in
         1)
-            week_number="${args[0]}"
-            if [ -z "$week_number" ]; then
+            week="${args[0]}"
+            if [ -z "$week" ]; then
                 echo "Enter the week number:"
-                read -r week_number
+                read -r week
             fi
-            display_lessons "$student_json" "$week_number"
+            display_lessons "$student_json" "$week"
             ;;
         2)
             display_upcoming_tests "$student_json"
             ;;
         3)
-            week_number="${args[0]}"
-            if [ -z "$week_number" ]; then
+            week="${args[0]}"
+            if [ -z "$week" ]; then
                 echo "Enter the week number:"
-                read -r week_number
+                read -r week
             fi
-            display_hour_for_week "$student_json" "$week_number"
+            display_hour_for_week "$student_json" "$week"
             ;;
         *)
             echo "Invalid option. Please try again."
@@ -115,20 +115,20 @@ teacher_menu() {
 
     case "$choice" in
         1)
-            week_number="${args[0]}"
-            if [ -z "$week_number" ]; then
+            week="${args[0]}"
+            if [ -z "$week" ]; then
                 echo "Enter the week number:"
-                read -r week_number
+                read -r week
             fi
-            display_lessons "$teacher_json" "$week_number"
+            display_lessons "$teacher_json" "$week"
             ;;
         2)
-            week_number="${args[0]}"
-            if [ -z "$week_number" ]; then
+            week="${args[0]}"
+            if [ -z "$week" ]; then
                 echo "Enter the week number:"
-                read -r week_number
+                read -r week
             fi
-            display_hour_for_week "$teacher_json" "$week_number"
+            display_hour_for_week "$teacher_json" "$week"
             ;;
         3)
             module_name="${args[0]}"
